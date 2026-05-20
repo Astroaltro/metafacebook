@@ -1,211 +1,165 @@
-import { 
-  Home, Search, Bell, Users, MessageSquare, Zap, 
-  Bookmark, ShieldCheck, User, MoreHorizontal, 
-  Image as ImageIcon, Smile, Calendar, MapPin, 
-  ListTodo, Repeat2, Heart, BarChart2, Share, CheckCircle2
-} from 'lucide-react';
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div className="app-container">
-      {/* Left Sidebar */}
-      <header className="left-sidebar">
-        <div className="nav-container">
-          <div className="logo-container">
-            <span className="x-logo">𝕏</span>
-          </div>
-          
-          <nav className="nav-links">
-            <div className="nav-item active">
-              <Home size={26} strokeWidth={2.5} />
-              <span>Home</span>
-            </div>
-            <div className="nav-item">
-              <Search size={26} />
-              <span>Explore</span>
-            </div>
-            <div className="nav-item">
-              <div className="icon-badge-wrapper">
-                <Bell size={26} />
-                <span className="badge">2</span>
-              </div>
-              <span>Notifications</span>
-            </div>
-            <div className="nav-item">
-              <Users size={26} />
-              <span>Follow</span>
-            </div>
-            <div className="nav-item">
-              <MessageSquare size={26} />
-              <span>Chat</span>
-            </div>
-            <div className="nav-item">
-              <Zap size={26} />
-              <span>Grok</span>
-            </div>
-            <div className="nav-item">
-              <Bookmark size={26} />
-              <span>Bookmarks</span>
-            </div>
-            <div className="nav-item">
-              <span className="x-logo-small">𝕏</span>
-              <span>Premium</span>
-              <span className="premium-tag">50% off</span>
-            </div>
-            <div className="nav-item">
-              <User size={26} />
-              <span>Profile</span>
-            </div>
-            <div className="nav-item">
-              <MoreHorizontal size={26} />
-              <span>More</span>
-            </div>
-          </nav>
-
-          <button className="post-btn-large">Post</button>
-        </div>
-
-        <div className="profile-pill">
-          <img src="https://ui-avatars.com/api/?name=Bangla+Senpai&background=random" alt="Profile" className="avatar" />
-          <div className="profile-info">
-            <div className="name">Bangla </div>
-            <div className="handle">@bangala</div>
-          </div>
-          <MoreHorizontal size={20} className="more-icon" />
+    <div className="fb-app-container">
+      
+      {/* 1. Header Section */}
+      <header className="section header">
+        <div className="fb-logo">facebook</div>
+        <div className="header-icons">
+          <button className="icon-btn">
+            <span>+</span>
+          </button>
+          <button className="icon-btn">
+            <span>🔍</span>
+          </button>
+          <button className="icon-btn">
+            <span>💬</span>
+            <span className="notification-badge">4</span>
+          </button>
         </div>
       </header>
 
-      {/* Main Feed Column */}
-      <main className="main-feed">
-        {/* Top Header */}
-        <div className="feed-header">
-          <div className="tab active">
-            <span>For you</span>
-            <div className="active-indicator"></div>
-          </div>
-          <div className="tab">
-            <span>Following</span>
-          </div>
-        </div>
+      {/* 2. Create Post Input */}
+      <section className="section create-post">
+        {/* Placeholder for user profile pic */}
+        <div className="profile-pic" style={{ backgroundColor: '#555' }}></div>
+        <div className="post-input">What's on your mind?</div>
+        <span style={{ fontSize: '24px', color: '#45BD62', cursor: 'pointer' }}>🖼️</span>
+      </section>
 
-        {/* Post Composer */}
-        <div className="post-composer">
-          <img src="https://ui-avatars.com/api/?name=Bangla+Senpai&background=random" alt="Profile" className="avatar" />
-          <div className="composer-content">
-            <input type="text" placeholder="What's happening?" className="composer-input" />
-            <div className="composer-actions">
-              <div className="action-icons">
-                <ImageIcon size={20} className="icon-blue" />
-                <div className="gif-icon icon-blue">GIF</div>
-                <ListTodo size={20} className="icon-blue" />
-                <Smile size={20} className="icon-blue" />
-                <Calendar size={20} className="icon-blue" />
-                <MapPin size={20} className="icon-blue disabled" />
-              </div>
-              <button className="post-btn-small" disabled>Post</button>
-            </div>
-          </div>
-        </div>
-
-        {/* Feed Posts */}
-        <div className="post">
-          <img src="https://ui-avatars.com/api/?name=Elon+Musk&background=random" alt="Elon Musk" className="avatar" />
-          <div className="post-content">
-            <div className="post-header">
-              <span className="name">Elon Musk</span>
-              <CheckCircle2 size={16} className="verified-icon" fill="#1d9bf0" color="white" />
-              <span className="x-badge">𝕏</span>
-              <span className="handle">@elonmusk · May 18</span>
-              <MoreHorizontal size={18} className="more-options" />
-            </div>
-            
-            {/* Simulating Video Placeholder */}
-            <div className="post-media video-placeholder">
-              <div className="video-info">
-                <span>5:27</span>
-                <span>From 🛡️ Ignorance, the root and stem of all evil</span>
-              </div>
-            </div>
-
-            <div className="post-engagements">
-              <div className="engagement"><MessageSquare size={18} /> 9.2K</div>
-              <div className="engagement"><Repeat2 size={18} /> 23K</div>
-              <div className="engagement"><Heart size={18} /> 156K</div>
-              <div className="engagement"><BarChart2 size={18} /> 55M</div>
-              <div className="engagement actions">
-                <Bookmark size={18} />
-                <Share size={18} />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Ad Post */}
-        <div className="post">
-          <img src="https://ui-avatars.com/api/?name=HOTD&background=random" alt="HOTDZero" className="avatar" />
-          <div className="post-content">
-            <div className="post-header">
-              <span className="name">[HOTDZero] HIGH SCHOOL OF THE DEAD ...</span>
-              <CheckCircle2 size={16} className="verified-icon gold" fill="#ffd700" color="black" />
-              <span className="handle">@HOTD_Ze... · Ad</span>
-              <MoreHorizontal size={18} className="more-options" />
-            </div>
-            <div className="post-text">
-              The TV anime 'HOTD' is being made into a game after about 15 years!
-              &lt;Them&gt; are coming—A survival tower defense game set at the dawn of the apocalypse.<br/><br/>
-              Start now and receive items worth over $600!
-            </div>
-            <div className="post-media ad-placeholder">
-              <span className="ad-tag">HOTD</span>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      {/* Right Sidebar */}
-      <aside className="right-sidebar">
-        <div className="search-bar">
-          <Search size={20} className="search-icon" />
-          <input type="text" placeholder="Search" />
-        </div>
-
-        <div className="sidebar-card premium-card">
-          <h2>Subscribe to Premium <span className="premium-tag small">50% off</span></h2>
-          <p>Get rid of ads, see your analytics, boost your replies and unlock 20+ features.</p>
-          <button className="subscribe-btn">Subscribe</button>
-        </div>
-
-        <div className="sidebar-card news-card">
-          <h2>Today's News</h2>
-          
-          <div className="trend-item">
-            <div className="trend-title">Wembanyama's 41-24 Double-Double Powers Spurs to Game 1 Win Over Thunder</div>
-            <div className="trend-meta">
-              <img src="https://ui-avatars.com/api/?name=Sport&background=random" className="tiny-avatar" alt="Sport" />
-              <span>1 day ago · Sports · 232.8K posts</span>
-            </div>
-          </div>
-          
-          <div className="trend-item">
-            <div className="trend-title">Dani Carvajal to Leave Real Madrid After 23 Years</div>
-            <div className="trend-meta">
-              <img src="https://ui-avatars.com/api/?name=News&background=random" className="tiny-avatar" alt="News" />
-              <span>2 days ago · Sports · 123.6K posts</span>
-            </div>
-          </div>
-        </div>
+      {/* 3. Stories Carousel */}
+      <section className="section stories-container">
         
-        <div className="sidebar-card trends-card">
-          <h2>What's happening</h2>
-          <div className="trend-item">
-            <div className="trend-category">Trending in Bangladesh <MoreHorizontal size={16} /></div>
-            <div className="trend-name">#ReactJS</div>
+        {/* Create Story Card */}
+        <div className="story-card create-story-card">
+          <div className="create-story-img" style={{ backgroundColor: '#2b3036' }}></div>
+          <div className="create-story-bottom">
+            <div className="create-story-btn">+</div>
+            Create story
           </div>
         </div>
-      </aside>
+
+        {/* Friend Story 1 */}
+        <div className="story-card">
+          <div className="story-bg" style={{ backgroundColor: '#333' }}></div>
+          <div className="story-author-pic" style={{ backgroundColor: '#666' }}></div>
+          <div className="story-overlay"> Noor</div>
+        </div>
+
+        {/* Friend Story 2 */}
+        <div className="story-card">
+          <div className="story-bg" style={{ backgroundColor: '#888' }}></div>
+          <div className="story-author-pic" style={{ backgroundColor: '#555' }}></div>
+          <div className="story-overlay"> Miraj</div>
+        </div>
+
+        {/* Friend Story 3 */}
+        <div className="story-card">
+          <div className="story-bg" style={{ backgroundColor: '#622' }}></div>
+          <div className="story-author-pic" style={{ backgroundColor: '#999' }}></div>
+          <div className="story-overlay">Mo...</div>
+        </div>
+      </section>
+
+      {/* 4. Post Feed */}
+      <section className="section post">
+        {/* Post Header */}
+        <div className="post-header">
+          <div className="post-author-info">
+            <div className="profile-pic" style={{ backgroundColor: '#d0d8e8' }}></div>
+            <div>
+              <div className="post-author-name"> Ferdous</div>
+              <div className="post-meta">
+                37m • <span>🌍</span>
+              </div>
+            </div>
+          </div>
+          <div className="post-actions">
+            <span>•••</span>
+            <span>✕</span>
+          </div>
+        </div>
+
+        {/* Post Text content */}
+        <div className="post-text">
+          যতদিন না বাংলাদেশে ধর্ষকদের এমন শাস্তি দেওয়া হবে, যেটা দেখে আরেকজন ধর্ষক ভয় পাবে, ততদিন এই ঘটনা থামবে না। পাবলিক এক্সিকিউশন ছাড়া ধর্ষণ থামবে... <span style={{ color: '#65676B', fontWeight: 'bold' }}>more</span>
+        </div>
+
+        {/* Post Image (Recreated purely with CSS & HTML to match your screenshot) */}
+        <div className="post-image-mock">
+          <span className="mock-quote-mark">“</span>
+          <span className="mock-source">Via: Ekattor Television</span>
+          
+          <div style={{ marginTop: '10px' }}>
+             <span className="mock-text-bg-red">এর বিচার আপনারা করতে পারবেন না।</span><br/>
+             <span className="mock-text-bg-red">আপনাদের এই ধরনের কোনো রেকর্ড</span><br/>
+             <span className="mock-text-bg-red">নেই।</span> 
+             <span className="mock-text-white" style={{ fontWeight: 'bold' }}> আমার মেয়েও ফিরে আসবে না। [..]</span>
+          </div>
+          
+          <div className="mock-text-white">
+            বড়জোর ১৫ দিন, এরপর আরেকটা ঘটনা<br/>
+            এসে এটা ধামাচাপা পড়ে যাবে। শেষষ!
+          </div>
+
+          <div style={{ marginTop: 'auto', color: '#aaa', fontSize: '12px' }}>
+            - মেয়ের ম*রদেহ প্রতিবেশীর কক্ষে...
+          </div>
+        </div>
+      </section>
+
+     {/* 5. Bottom Navigation Bar */}
+      <nav className="bottom-nav">
+        
+        {/* Home Icon (Active - Filled) */}
+        <span className="nav-item active">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="28" height="28">
+            <path d="M12 3l8 6.5v11.5h-5v-6h-6v6h-5v-11.5z"/>
+          </svg>
+        </span>
+
+        {/* Video / Watch Icon */}
+        <span className="nav-item">
+          <svg fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" width="28" height="28">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+            <polygon points="10 11 15 14 10 17 10 11" fill="currentColor" stroke="none" />
+          </svg>
+        </span>
+
+        {/* Friends / Groups Icon */}
+        <span className="nav-item">
+          <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="28" height="28">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </span>
+
+        {/* Marketplace / Store Icon */}
+        <span className="nav-item">
+          <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="28" height="28">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </span>
+
+        {/* Notifications Icon */}
+        <span className="nav-item">
+          <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="28" height="28">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 01-3.46 0"/>
+          </svg>
+        </span>
+
+        {/* Profile menu icon */}
+        <div className="nav-item">
+          <div className="nav-profile" style={{ backgroundColor: '#ddd', width: '32px', height: '32px' }}></div>
+        </div>
+      </nav>
+
     </div>
   );
 }
-
-export default App;
