@@ -1,239 +1,340 @@
-.tg-container {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 400px;
-  height: 800px;
-  background-color: #0f1822; /* Telegram Dark Theme background */
-  color: #ffffff;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  font-family: system-ui, -apple-system, sans-serif;
-  border: 1px solid #262626;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Header */
-.tg-header {
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 414px;
+  height: 100vh;
+  position: relative;
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+/* --- INTERACTIVITY STYLES --- */
+.interactive {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile */
+  transition: transform 0.1s ease-in-out, opacity 0.2s;
+}
+
+.interactive:active {
+  transform: scale(0.90);
+  opacity: 0.8;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.pop-animation {
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Background & Overlays */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-text {
+  font-size: 24px;
+  font-weight: bold;
+  opacity: 0.2;
+}
+
+.swipe-up-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.9;
+  z-index: 5;
+  pointer-events: none; /* Prevents overlay from blocking clicks */
+}
+
+.hand-icon {
+  margin-bottom: 15px;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
+}
+
+.swipe-up-overlay h2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+/* Top Navigation */
+.top-nav {
+  position: absolute;
+  top: 40px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 0 20px;
+  z-index: 10;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-.tg-header-left {
+.nav-icon {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
 }
 
-.tg-title {
-  font-size: 20px;
+.live-badge {
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.center-tabs {
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
   font-weight: 600;
-  margin: 0;
 }
 
-/* Search Bar */
-.tg-search-container {
-  padding: 0 16px 12px 16px;
+.tab {
+  opacity: 0.7;
 }
 
-.tg-search-bar {
+.tab.active {
+  opacity: 1;
+  position: relative;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+  position: absolute;
+  right: 12px;
+  bottom: 80px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #1c2736;
-  border-radius: 20px;
-  padding: 8px 12px;
-  gap: 8px;
+  gap: 20px;
+  z-index: 10;
 }
 
-.tg-search-input {
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 15px;
-  width: 100%;
-  outline: none;
-}
-
-.tg-search-input::placeholder {
-  color: #6b7d8d;
-}
-
-/* Chat List */
-.tg-chat-list {
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-.tg-chat-list::-webkit-scrollbar {
-  display: none;
-}
-
-.tg-chat-item {
+.action-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 10px 16px;
-  gap: 14px;
-  cursor: pointer;
+  gap: 5px;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
 }
 
-.tg-chat-item:active {
-  background-color: #1c2736;
+.action-item span {
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
 }
 
-.tg-avatar-container {
-  width: 52px;
-  height: 52px;
+.profile-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.profile-pic {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+  border: 1px solid white;
   overflow: hidden;
-  background-color: #1c2736;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
-.tg-avatar {
+.profile-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.tg-chat-info {
-  flex: 1;
-  overflow: hidden;
+.plus-button {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff2b55;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.tg-chat-row-1 {
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
-.tg-chat-title {
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.audio-record {
+  margin-top: 10px;
+}
+
+.record-disc {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #333, #666);
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 4px;
+  border: 8px solid #222;
+  animation: spin 4s linear infinite;
 }
 
-.tg-chat-time {
-  font-size: 12px;
-  color: #6b7d8d;
-  flex-shrink: 0;
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }
 
-.tg-chat-row-2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.tg-chat-message {
-  font-size: 14px;
-  color: #8b9eb0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Badges */
-.tg-badge {
-  background-color: #40a7e3; /* Telegram Blue */
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 12px;
-  min-width: 22px;
-  text-align: center;
-}
-
-.tg-badge-muted {
-  background-color: #3b4958;
-}
-
-/* Floating Action Button */
-.tg-fab {
+/* Bottom Left Info */
+.bottom-info {
   position: absolute;
   bottom: 80px;
-  right: 20px;
-  width: 56px;
-  height: 56px;
-  background-color: #40a7e3;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
+  left: 15px;
   z-index: 10;
+  width: calc(100% - 80px);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-.tg-fab:active {
-  transform: scale(0.95);
+.username {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.audio-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
 /* Bottom Navigation */
-.tg-bottom-nav {
-  height: 64px;
-  background-color: #0f1822;
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-bottom: 8px;
-  border-top: 1px solid #1c2736;
-  position: relative;
-  z-index: 10;
+  z-index: 20;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
-.tg-nav-item {
+.nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: #6b7d8d;
-  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5); /* Default grayed out */
+}
+
+.nav-item.active {
+  color: white; /* White when active */
+}
+
+.nav-item span {
+  font-size: 10px;
   font-weight: 500;
-  cursor: pointer;
+  user-select: none;
+}
+
+.icon-with-badge {
   position: relative;
 }
 
-.tg-nav-item.active {
-  color: #40a7e3;
-}
-
-.tg-nav-icon-bg {
-  padding: 4px 16px;
-  border-radius: 16px;
-}
-
-.tg-nav-item.active .tg-nav-icon-bg {
-  background-color: rgba(64, 167, 227, 0.15);
-}
-
-.tg-nav-badge {
+.dot-badge {
   position: absolute;
   top: -2px;
-  right: 4px;
-  background-color: #40a7e3;
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 10px;
-  border: 2px solid #0f1822;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff2b55;
+  border-radius: 50%;
+}
+
+.create-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-btn {
+  background: white;
+  width: 44px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.create-btn::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  width: 10px;
+  height: 100%;
+  background: #25f4ee;
+  border-radius: 8px 0 0 8px;
+  z-index: -1;
+}
+
+.create-btn::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  width: 10px;
+  height: 100%;
+  background: #fe2c55;
+  border-radius: 0 8px 8px 0;
+  z-index: -1;
 }
